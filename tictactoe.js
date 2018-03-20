@@ -7,16 +7,17 @@ var p1Won = 0;
 var p2Won =0;
 var p1Lost =0;
 var p2Lost =0;
+var Draw = false;
 var gameStop =false;
+var count=0;
 function play(event){
   console.log(event);
-
     if(!event.target.innerText && gameStop == false){
     event.target.innerText= turn? "O":"X";
+    count++;
     document.getElementById("GameStatus").innerHTML = "Game in Progress!";
     checkWinner();
     turn =!turn;
-
     }
     else{
       alert("Restart Game!")
@@ -24,7 +25,6 @@ function play(event){
 }
 //8 winning conditions
 function checkWinner() {
-
 //1st row
   if( (document.getElementById("0").innerHTML == document.getElementById("1").innerHTML) && (document.getElementById("0").innerHTML == document.getElementById("2").innerHTML ) && document.getElementById("0").innerHTML != "" ){
     console.log("1st row");
@@ -155,7 +155,6 @@ function checkWinner() {
 
       }
   }
-
 //3rd col
   else if (document.getElementById("2").innerHTML == document.getElementById("5").innerHTML && document.getElementById("5").innerHTML == document.getElementById("8").innerHTML && document.getElementById("8").innerHTML != "") {
     console.log("3rd col");
@@ -230,6 +229,12 @@ function checkWinner() {
           gameStop = true;
 
       }
+
+  }
+  else if(count==9 && gameStop == false){
+    document.getElementById("GameStatus").innerHTML = "Draw!";
+    gameStop = true;
+    alert("Draw!")
   }
 }
 function restartGame(){
@@ -238,10 +243,9 @@ function restartGame(){
       document.getElementById(i).innerText ="";
 }
   gameStop = false;
+  count=0;
   document.getElementById("GameStatus").innerHTML = "New Game";
-
 }
-
 document.getElementById("restart").addEventListener("click",function (event){
   console.log("workin?");
   restartGame();
