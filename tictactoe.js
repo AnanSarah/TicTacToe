@@ -7,24 +7,21 @@ var p1Won = 0;
 var p2Won =0;
 var p1Lost =0;
 var p2Lost =0;
+var gameStop =false;
 function play(event){
   console.log(event);
-    if(!event.target.innerText){
+
+    if(!event.target.innerText && gameStop == false){
     event.target.innerText= turn? "O":"X";
+    document.getElementById("GameStatus").innerHTML = "Game in Progress!";
     checkWinner();
     turn =!turn;
 
-    //countFunc++ ;
-//any winning state occurs after 5 turns
-    /*if(countFunc>4){
-      checkWinner();
     }
-      turn =!turn;
-    } bleh this aint working
-      */
+    else{
+      alert("Restart Game!")
+    }
 }
-}
-
 //8 winning conditions
 function checkWinner() {
 
@@ -38,7 +35,7 @@ function checkWinner() {
       document.getElementById("p1Win").innerHTML = p1Won;
       p2Lost++;
       document.getElementById("p2Loss").innerHTML = p2Lost;
-
+      gameStop = true;
     }
     else {
         console.log(
@@ -48,13 +45,15 @@ function checkWinner() {
         document.getElementById("GameStatus").innerHTML = "Player 2 wins!";
         document.getElementById("p2Win").innerHTML = p2Won;
         p1Lost++;
-        document.getElementById("p1Loss").innerHTML = p1Lost;
+          document.getElementById("p1Loss").innerHTML = p1Lost;
+          gameStop = true;
     }
   }
 
 //2nd row
   else if (document.getElementById("3").innerHTML == document.getElementById("4").innerHTML && document.getElementById("4").innerHTML == document.getElementById("5").innerHTML && document.getElementById("5").innerHTML != "") {
     console.log("2nd row");
+
     if(turn == false){
       console.log("player1");
       p1Won++;
@@ -62,6 +61,7 @@ function checkWinner() {
       document.getElementById("p1Win").innerHTML = p1Won;
       p2Lost++;
       document.getElementById("p2Loss").innerHTML = p2Lost;
+      gameStop = true;
 
     }
     else {
@@ -73,6 +73,7 @@ function checkWinner() {
         document.getElementById("p2Win").innerHTML = p2Won;
         p1Lost++;
         document.getElementById("p1Loss").innerHTML = p1Lost;
+        gameStop = true;
 
     }
   }
@@ -87,6 +88,7 @@ function checkWinner() {
       document.getElementById("p1Win").innerHTML = p1Won;
       p2Lost++;
       document.getElementById("p2Loss").innerHTML = p2Lost;
+      gameStop = true;
     }
     else {
         console.log(
@@ -97,7 +99,7 @@ function checkWinner() {
         document.getElementById("p2Win").innerHTML = p2Won;
         p1Lost++;
         document.getElementById("p1Loss").innerHTML = p1Lost;
-
+        gameStop = true;
     }
   }
 
@@ -111,6 +113,7 @@ function checkWinner() {
       document.getElementById("p1Win").innerHTML = p1Won;
       p2Lost++;
       document.getElementById("p2Loss").innerHTML = p2Lost;
+      gameStop = true;
     }
     else {
         console.log(
@@ -121,6 +124,7 @@ function checkWinner() {
             document.getElementById("p2Win").innerHTML = p2Won;
             p1Lost++;
             document.getElementById("p1Loss").innerHTML = p1Lost;
+            gameStop = true;
 
     }
   }
@@ -135,6 +139,7 @@ function checkWinner() {
         document.getElementById("p1Win").innerHTML = p1Won;
         p2Lost++;
         document.getElementById("p2Loss").innerHTML = p2Lost;
+        gameStop = true;
       }
       else {
           console.log(
@@ -146,6 +151,7 @@ function checkWinner() {
           document.getElementById("p2Win").innerHTML = p2Won;
           p1Lost++;
           document.getElementById("p1Loss").innerHTML = p1Lost;
+          gameStop = true;
 
       }
   }
@@ -159,7 +165,9 @@ function checkWinner() {
       document.getElementById("GameStatus").innerHTML = "Player 1 wins!";
       document.getElementById("p1Win").innerHTML = p1Won;
       p2Lost++;
-      document.getElementById("p2Loss").innerHTML = p2Lost;}
+      document.getElementById("p2Loss").innerHTML = p2Lost;
+      gameStop = true;
+    }
     else {
         console.log(
           "player2"
@@ -169,6 +177,7 @@ function checkWinner() {
         document.getElementById("p2Win").innerHTML = p2Won;
         p1Lost++;
         document.getElementById("p1Loss").innerHTML = p1Lost;
+        gameStop = true;
       }
   }
 
@@ -182,6 +191,7 @@ function checkWinner() {
         document.getElementById("p1Win").innerHTML = p1Won;
         p2Lost++;
         document.getElementById("p2Loss").innerHTML = p2Lost;
+        gameStop = true;
       }
       else {
           console.log(
@@ -192,6 +202,7 @@ function checkWinner() {
           document.getElementById("p2Win").innerHTML = p2Won;
           p1Lost++;
           document.getElementById("p1Loss").innerHTML = p1Lost;
+          gameStop = true;
         }
   }
 
@@ -205,6 +216,7 @@ function checkWinner() {
         document.getElementById("p1Win").innerHTML = p1Won;
         p2Lost++;
         document.getElementById("p2Loss").innerHTML = p2Lost;
+        gameStop = true;
       }
       else {
           console.log(
@@ -215,6 +227,7 @@ function checkWinner() {
           document.getElementById("p2Win").innerHTML = p2Won;
           p1Lost++;
           document.getElementById("p1Loss").innerHTML = p1Lost;
+          gameStop = true;
 
       }
   }
@@ -224,6 +237,9 @@ function restartGame(){
   for (var i = 0; i < 9; i++) {
       document.getElementById(i).innerText ="";
 }
+  gameStop = false;
+  document.getElementById("GameStatus").innerHTML = "New Game";
+
 }
 
 document.getElementById("restart").addEventListener("click",function (event){
